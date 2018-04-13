@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -84,8 +85,8 @@ public class FileSizeTest {
 		assertEquals(getReadableIEC(dirSize) + "MB", FileSizeCore.convertToReadable(dirSize, SIZE_STANDARD.IEC));
 		assertEquals(getReadableIEC(fileSize) + "KB", FileSizeCore.convertToReadable(fileSize, SIZE_STANDARD.IEC));
 
-		assertEquals("1,00MB", FileSizeCore.convertToReadable(1024*1024, SIZE_STANDARD.JEDEC));
-		assertEquals("1,00MB", FileSizeCore.convertToReadable(1000*1000, SIZE_STANDARD.IEC));
+		assertEquals("1,00MB", FileSizeCore.convertToReadable(1024 * 1024, SIZE_STANDARD.JEDEC));
+		assertEquals("1,00MB", FileSizeCore.convertToReadable(1000 * 1000, SIZE_STANDARD.IEC));
 	}
 
 	private File testDirectory;
