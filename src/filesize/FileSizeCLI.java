@@ -2,11 +2,12 @@ package filesize;
 
 import org.apache.commons.cli.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class FileSizeCLI {
 	public static void main(String[] args) {
-		Option humanReadFormat = new Option("h",false, "Human readable format");
+		Option humanReadFormat = new Option("h", false, "Human readable format");
 		humanReadFormat.setRequired(false);
 
 		Option sumAll = new Option("c", false, "Calculate size of all files");
@@ -24,7 +25,8 @@ public class FileSizeCLI {
 		CommandLine commandLine;
 		try {
 			commandLine = clParser.parse(options, args);
-			FileSize fSize = new FileSize(new HashSet<>(commandLine.getArgList()));
+			HashSet<String> set = new HashSet<>(commandLine.getArgList());
+			FileSize fSize = new FileSize(new ArrayList<>(set));
 
 			fSize.setStandard(commandLine.hasOption("si") ? SIZE_STANDARD.IEC : SIZE_STANDARD.JEDEC);
 			fSize.setReadable(commandLine.hasOption("h"));
