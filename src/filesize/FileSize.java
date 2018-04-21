@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class FileSize outputs a size of file or list files
+ * The class FileSize is used to string output a size of files and directories
  *
  * @author LLDay
  */
