@@ -2,7 +2,7 @@ package filesize;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
 /**
  * This class FileSize outputs a size of file or list files
@@ -15,9 +15,12 @@ public class FileSize {
 	 *
 	 * @param listFilesStr is a list with paths to files
 	 */
-	public FileSize(HashSet<String> listFilesStr) {
+	public FileSize(List<String> listFilesStr) {
 		if (listFilesStr == null)
 			throw new NullPointerException("String listFilesStr in not initialized");
+
+		if (listFilesStr.isEmpty())
+			throw new IllegalArgumentException("List of filenames is empty");
 
 		listFiles = new ArrayList<>();
 		readable = true;
@@ -70,7 +73,7 @@ public class FileSize {
 		StringBuilder strBuff = new StringBuilder();
 
 		for (File file : listFiles)
-			strBuff.append(String.format("%1$-40s",file.getName()) + getConvertSize(FileSizeCore.getFileSize(file)) + '\n');
+			strBuff.append(String.format("%1$-40s", file.getName()) + getConvertSize(FileSizeCore.getFileSize(file)) + '\n');
 
 		return strBuff.toString();
 	}
