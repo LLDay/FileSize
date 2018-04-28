@@ -30,7 +30,10 @@ public class FileSize {
 			File tmpFile = new File(fileStr);
 			if (!tmpFile.exists())
 				throw new IllegalArgumentException("File " + tmpFile.getName() + " is not exist");
-			listFiles.add(tmpFile);
+
+
+			if (!listFiles.contains(tmpFile))
+				listFiles.add(tmpFile);
 		}
 	}
 
@@ -96,7 +99,7 @@ public class FileSize {
 	}
 
 
-	private ArrayList<File> listFiles;
+	private List<File> listFiles;
 	private boolean readable;
 	private SIZE_STANDARD standard;
 }

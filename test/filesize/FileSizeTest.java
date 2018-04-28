@@ -48,7 +48,7 @@ public class FileSizeTest {
 		assertEquals(3278, FileSizeCore.getFileSize(file3_20KB));
 		assertEquals(0, FileSizeCore.getFileSize(emptyFile));
 
-		ArrayList<File> listFiles = new ArrayList<>();
+		ArrayList<File> listFiles = new ArrayList<File>();
 		listFiles.add(directory1_75MB);
 		listFiles.add(file144KB);
 		listFiles.add(file3_20KB);

@@ -2,8 +2,6 @@ package filesize;
 
 import org.apache.commons.cli.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 
 public class FileSizeCLI {
 	public static void main(String[] args) {
@@ -23,10 +21,10 @@ public class FileSizeCLI {
 
 		CommandLineParser clParser = new DefaultParser();
 		CommandLine commandLine;
+
 		try {
 			commandLine = clParser.parse(options, args);
-			HashSet<String> set = new HashSet<>(commandLine.getArgList());
-			FileSize fSize = new FileSize(new ArrayList<>(set));
+			FileSize fSize = new FileSize(commandLine.getArgList());
 
 			fSize.setStandard(commandLine.hasOption("si") ? SIZE_STANDARD.IEC : SIZE_STANDARD.JEDEC);
 			fSize.setReadable(commandLine.hasOption("h"));
@@ -38,6 +36,15 @@ public class FileSizeCLI {
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
+
+			try {
+				Thread.sleep(2000L);
+			}
+			catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+				throw new RuntimeException(ex);
+			}
+
 			System.exit(1);
 		}
 	}

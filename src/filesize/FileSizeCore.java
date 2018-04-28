@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.List;
 
 enum SIZE_STANDARD {
-	JEDEC,	//1024
-	IEC		//1000
+	JEDEC, //1024
+	IEC    //1000
 }
 
 /**
@@ -58,7 +58,7 @@ public class FileSizeCore {
 	}
 
 	/**
-	 * @param bytes    is size of a file in bytes
+	 * @param bytes is size of a file in bytes
 	 * @param standard is usable standard to calculate a size of files
 	 * @return string representation in KB
 	 */
@@ -69,7 +69,7 @@ public class FileSizeCore {
 	}
 
 	/**
-	 * @param bytes    is size of a file in bytes
+	 * @param bytes is size of a file in bytes
 	 * @param standard is usable standard to calculate a size of files
 	 * @return string representation in useful format (KB, MB, GB, TB)
 	 */
