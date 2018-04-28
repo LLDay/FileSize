@@ -31,7 +31,6 @@ public class FileSize {
 			if (!tmpFile.exists())
 				throw new IllegalArgumentException("File " + tmpFile.getName() + " is not exist");
 
-
 			if (!listFiles.contains(tmpFile))
 				listFiles.add(tmpFile);
 		}
@@ -76,7 +75,9 @@ public class FileSize {
 		StringBuilder strBuff = new StringBuilder();
 
 		for (File file : listFiles)
-			strBuff.append(String.format("%1$-40s", file.getName()) + getConvertSize(FileSizeCore.getFileSize(file)) + '\n');
+			strBuff.append(String.format("%1$-40s", file.getName())).
+					append(getConvertSize(FileSizeCore.getFileSize(file))).
+					append('\n');
 
 		return strBuff.toString();
 	}

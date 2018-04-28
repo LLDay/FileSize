@@ -48,13 +48,38 @@ public class FileSizeTest {
 		assertEquals(3278, FileSizeCore.getFileSize(file3_20KB));
 		assertEquals(0, FileSizeCore.getFileSize(emptyFile));
 
-		ArrayList<File> listFiles = new ArrayList<File>();
+		ArrayList<File> listFiles = new ArrayList<>();
 		listFiles.add(directory1_75MB);
 		listFiles.add(file144KB);
 		listFiles.add(file3_20KB);
 		listFiles.add(emptyFile);
 
 		assertEquals(FileSizeCore.getFileSize(testDirectory), FileSizeCore.getSumSize(listFiles));
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			ArrayList<String> args = new ArrayList<>();
+			args.add("nonexistentFile.txt");
+			new FileSize(args);
+		});
+
+		assertThrows(NullPointerException.class, () -> {
+			ArrayList<String> args = null;
+			new FileSize(args);
+		});
+	}
+
+	@Test
+	void repeatTest() {
+		ArrayList<String> fileStr = new ArrayList<>();
+		fileStr.add(directory1_75MB.getPath());
+		fileStr.add(file3_20KB.getPath()); //!
+		fileStr.add(file144KB.getPath());
+		fileStr.add(file3_20KB.getPath()); //!
+
+		FileSize fs = new FileSize(fileStr);
+		String result = fs.getEachFile();
+
+		assertTrue(result.split("\n").length == 3);
 	}
 
 	@Test
