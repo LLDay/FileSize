@@ -62,6 +62,11 @@ public class FileSizeTest {
 			new FileSize(args);
 		});
 
+		assertThrows(IllegalArgumentException.class, () -> {
+			ArrayList<String> args = new ArrayList<>();
+			new FileSize(args);
+		});
+
 		assertThrows(NullPointerException.class, () -> {
 			ArrayList<String> args = null;
 			new FileSize(args);
@@ -113,6 +118,7 @@ public class FileSizeTest {
 		assertEquals("1,00MB", FileSizeCore.convertToReadable(1024 * 1024, SIZE_STANDARD.JEDEC));
 		assertEquals("1,00MB", FileSizeCore.convertToReadable(1000 * 1000, SIZE_STANDARD.IEC));
 	}
+
 
 	private File testDirectory;
 	private File directory1_75MB;
