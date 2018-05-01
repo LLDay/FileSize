@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import com.sun.glass.ui.Size;
 import org.junit.jupiter.api.Test;
 
 
