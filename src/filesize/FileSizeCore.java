@@ -1,7 +1,6 @@
 package filesize;
 
 import java.io.File;
-import java.util.List;
 
 enum SIZE_STANDARD {
 	JEDEC, //1024
@@ -43,7 +42,7 @@ public class FileSizeCore {
 	 * @param listFiles some file list
 	 * @return common size of all files from a list
 	 */
-	public static long getSumSize(List<File> listFiles) {
+	public static long getSumSize(Iterable<File> listFiles) {
 		if (listFiles == null)
 			throw new IllegalArgumentException("List of files is not initialized");
 
@@ -79,9 +78,10 @@ public class FileSizeCore {
 		double kBytes = (double) bytes / conversionVal;
 
 		String prefix[] = {"KB", "MB", "GB", "TB"};
+		final int maxIndex = prefix.length - 1;
 		int index = 0;
 
-		while (index < 4 && kBytes >= conversionVal) {
+		while (index < maxIndex && kBytes >= conversionVal) {
 			kBytes /= conversionVal;
 			index++;
 		}

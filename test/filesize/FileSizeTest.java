@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.sun.glass.ui.Size;
 import org.junit.jupiter.api.Test;
 
 
@@ -15,6 +16,14 @@ public class FileSizeTest {
 		emptyFile = new File("testDirectory/0KB.txt");
 		file3_20KB = new File("testDirectory/3.20KB.txt");
 		file144KB = new File("testDirectory/144KB.txt");
+
+		ArrayList<String> fileStr = new ArrayList<>();
+		fileStr.add(directory1_75MB.getPath());
+		fileStr.add(file3_20KB.getPath()); //!
+		fileStr.add(file144KB.getPath());
+		fileStr.add(file3_20KB.getPath()); //!
+
+		fs = new FileSize(fileStr);
 	}
 
 	private String getRoundingNumber(double d) {
@@ -75,16 +84,29 @@ public class FileSizeTest {
 
 	@Test
 	void repeatTest() {
-		ArrayList<String> fileStr = new ArrayList<>();
-		fileStr.add(directory1_75MB.getPath());
-		fileStr.add(file3_20KB.getPath()); //!
-		fileStr.add(file144KB.getPath());
-		fileStr.add(file3_20KB.getPath()); //!
-
-		FileSize fs = new FileSize(fileStr);
 		String result = fs.getEachFile();
-
 		assertTrue(result.split("\n").length == 3);
+	}
+
+	@Test
+	void keyExTest() {
+		//default settings
+		assertEquals(SIZE_STANDARD.JEDEC, fs.getStandard());
+		assertEquals(true, fs.getReadable());
+
+		String defStr = fs.getSumFile();
+
+		//changed settings
+		fs.setStandard(SIZE_STANDARD.IEC);
+		assertFalse(fs.getSumFile().equals(defStr));
+		assertTrue(fs.getSumFile().contains("MB"));
+		fs.setStandard(SIZE_STANDARD.JEDEC);
+
+		fs.setReadable(false);
+		assertFalse(fs.getSumFile().equals(defStr));
+		String nonReadableStr = fs.getSumFile();
+		assertTrue(!nonReadableStr.contains("MB") || !nonReadableStr.contains("KB"));
+		fs.setReadable(true);
 	}
 
 	@Test
@@ -117,6 +139,8 @@ public class FileSizeTest {
 
 		assertEquals("1,00MB", FileSizeCore.convertToReadable(1024 * 1024, SIZE_STANDARD.JEDEC));
 		assertEquals("1,00MB", FileSizeCore.convertToReadable(1000 * 1000, SIZE_STANDARD.IEC));
+
+		assertEquals("1024,00TB", FileSizeCore.convertToReadable(1024L * 1024L * 1024L * 1024L * 1024L, SIZE_STANDARD.JEDEC));
 	}
 
 
@@ -125,4 +149,5 @@ public class FileSizeTest {
 	private File emptyFile;
 	private File file3_20KB;
 	private File file144KB;
+	private FileSize fs;
 }

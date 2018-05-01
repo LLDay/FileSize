@@ -1,7 +1,8 @@
 package filesize;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class FileSize {
 		if (listFilesStr.isEmpty())
 			throw new IllegalArgumentException("List of filenames is empty");
 
-		listFiles = new ArrayList<>();
+		listFiles = new HashSet<>();
 		readable = true;
 		setStandard(SIZE_STANDARD.JEDEC);
 
@@ -100,7 +101,7 @@ public class FileSize {
 	}
 
 
-	private List<File> listFiles;
+	private Set<File> listFiles;
 	private boolean readable;
 	private SIZE_STANDARD standard;
 }
