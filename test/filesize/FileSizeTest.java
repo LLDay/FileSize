@@ -105,6 +105,8 @@ public class FileSizeTest {
 		String nonReadableStr = fs.getSumFile();
 		assertTrue(!nonReadableStr.contains("MB") || !nonReadableStr.contains("KB"));
 		fs.setReadable(true);
+
+		assertEquals(fs.getSumFile(), defStr);
 	}
 
 	@Test
