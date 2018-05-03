@@ -32,8 +32,7 @@ public class FileSize {
 			if (!tmpFile.exists())
 				throw new IllegalArgumentException("File " + tmpFile.getName() + " is not exist");
 
-			if (!listFiles.contains(tmpFile))
-				listFiles.add(tmpFile);
+			listFiles.add(tmpFile);
 		}
 	}
 
